@@ -26,7 +26,7 @@ SmartHome Valuator is a powerful web application that can provide valuable insig
 [![SmartHome Valuator Demo](https://i.ytimg.com/an_webp/6_l3GrxRVGo/mqdefault_6s.webp?du=3000&sqp=CMimz7QG&rs=AOn4CLB51b6qdnjiUp9DOMSCUX5-r2BRIg)](https://youtu.be/6_l3GrxRVGo)
 
 ### Screenshot
-![Example Image](images/screenshots.png)
+![Example Image](images/Screenshots.png)
 
 ## Tech Stack
 
