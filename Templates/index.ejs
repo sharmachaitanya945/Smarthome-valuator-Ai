@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>SmartHome Valuator: AI-Powered Price Predictions</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e1e2f, #1a1a2e);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .navbar-inverse {
+      background: linear-gradient(135deg, #33334d, #1a1a2e);
+      border-color: #1a1a2e;
+    }
+    .navbar-inverse .navbar-brand,
+    .navbar-inverse .navbar-nav>li>a {
+      color: #ffffff;
+    }
+    .navbar-header img.logo {
+      max-height: 50px;
+      max-width: 50px;
+      margin-right: 10px;
+    }
+    .btn-default {
+      background: linear-gradient(135deg, #33334d, #1a1a2e);
+      color: #ffffff;
+      border: none;
+    }
+    footer.navbar-default {
+      background: linear-gradient(135deg, #33334d, #1a1a2e);
+      color: #ffffff;
+      text-align: center;
+      margin-top: auto;
+    }
+    h2, h3, ul li, .form-group label {
+      color: #ffffff;
+    }
+    h2 {
+      text-transform: uppercase;
+    }
+    ul li {
+      font-style: italic;
+      font-size: medium;
+    }
+    .form-control {
+      background-color: #2a2a3e;
+      color: #ffffff;
+      border: 1px solid #33334d;
+    }
+    .form-control:focus {
+      background-color: #2a2a3e;
+      color: #ffffff;
+      border: 1px solid #ffffff;
+    }
+    .github-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+    }
+    .github-button a {
+      background-color: #33334d;
+      color: #ffffff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .github-button a:hover {
+      background-color: #1a1a2e;
+    }
+    .footer-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        
+        <a class="navbar-brand" href="#">SmartHome Valuator: AI-Powered Price Predictions🏡🤖</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="#">🏠 Home</a></li>
+        <li><a href="http://localhost:3000/dashboard">📊 Dashboard</a></li>
+      </ul>
+    </div>
+  </nav>
+  <br>
+  <br>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">
+          <h2>California Housing Price Forecasting 📈</h2>
+          <br>
+          <hr>
+          <ul>
+            <li>Explore our predictive model and discover the perfect house for your budget 🏡</li>
+            <br>
+            <li>Our cutting-edge algorithm accurately forecasts real estate values for smarter investments 💼</li>
+            <br>
+            <li>Leverage our state-of-the-art model to make informed decisions and achieve your financial goals 💰</li>
+            <br>
+            <li>Streamline your property search with our user-friendly tool that predicts housing prices in California 🔍</li>
+          </ul>
+        </div>
+        <div class="col-sm-6">
+          <h3 style="text-align: center;">California Home Value Calculator 💵</h3>
+          <form action="/predict" method="post" style="height:80%;">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="longitude">🌍 Longitude</label>
+                <input type="text" class="form-control" name="longitude" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="latitude">🌍 Latitude</label>
+                <input type="text" class="form-control" name="latitude" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="housing_median_age">🏡 Housing Median Age</label>
+                <input type="text" class="form-control" name="housing_median_age" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="total_rooms">🚪 Total Rooms</label>
+                <input type="text" class="form-control" name="total_rooms" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="total_bedrooms">🛏️ Total Bedrooms</label>
+                <input type="text" class="form-control" name="total_bedrooms" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="population">👨‍👩‍👧‍👦 Population</label>
+                <input type="text" class="form-control" name="population" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="households">🏘️ Households</label>
+                <input type="text" class="form-control" name="households" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="median_income">💵 Median Income</label>
+                <input type="text" class="form-control" name="median_income" required>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="ocean_proximity">🌊 Ocean Proximity</label>
+                <select class="form-control" name="ocean_proximity" required>
+                  <option value="<1H OCEAN">Less than 1 hour to ocean</option>
+                  <option value="INLAND">Inland</option>
+                  <option value="NEAR OCEAN">Near ocean</option>
+                  <option value="NEAR BAY">Near bay</option>
+                  <option value="ISLAND">Island</option>
+                </select>
+              </div>
+              <div class="form-group col-md-12">
+                <button type="submit" class="btn btn-default">Calculate 📊</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+  <br><br><br>
+  <footer class="navbar navbar-default">
+    <div class="container footer-container">
+      <p>Quira Quest + Mindsdb</p>
+      <p>Made with ❤️ by Chaitanya Sharma</p>
+      
+    </div>
+  </footer>
+  <div class="github-button">
+    <a href="https://github.com/sharmachaitanya945/Smarthome-Ai" target="_blank">View on GitHub</a>
+  </div>
+</body>
+</html>

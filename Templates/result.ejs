@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>SmartHome Valuator: AI-Powered Price Predictions</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e1e2f, #1a1a2e);
+      color: #ffffff;
+    }
+
+    .navbar-inverse {
+      background: linear-gradient(135deg, #33334d, #1a1a2e);
+      border-color: #1a1a2e;
+    }
+
+    .navbar-inverse .navbar-brand {
+      color: #ffffff;
+    }
+
+    .navbar-inverse .navbar-nav>li>a {
+      color: #ffffff;
+    }
+
+    .btn-default {
+      background: linear-gradient(135deg, #33334d, #1a1a2e);
+      color: #ffffff;
+      border: none;
+    }
+
+    footer.navbar-default {
+      background: linear-gradient(135deg, #33334d, #1a1a2e);
+      color: #ffffff;
+    }
+
+    .table thead {
+      background-color: #33334d;
+      color: #ffffff;
+    }
+
+    .table tbody tr {
+      background-color: #2a2a3e;
+      color: #ffffff;
+    }
+
+    .table-striped>tbody>tr:nth-of-type(odd) {
+      background-color: #1e1e2f;
+    }
+
+    h1, h3, h4 {
+      color: #ffffff;
+    }
+
+    .logo {
+      max-height: 50px;
+      max-width: 50px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+      <a class="navbar-brand" href="#">SmartHome Valuator: AI-Powered Price Predictions</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://localhost:3000/dashboard">📊 Dashboard</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <h1 style="text-align:center">🏡 California House Price Prediction</h1>
+    <h3 style="text-align:center">The Predicted Home Price is: $<%= homePrice %> 💵</h3>
+    <h4 style="text-align:center">🌊 Ocean Proximity: <%= ocean_proximity %></h4>
+    <div style="text-align: center;">
+      <a href="/"><button class="btn btn-default">🏠 Go Home</button></a>
+    </div>
+
+    <h3 style="text-align:center">📈 California Median Values by Ocean Proximity</h3>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>🌊 Ocean Proximity</th>
+                <th>🏠 Median House Price</th>
+                <th>💰 Median Income</th>
+                <th>📅 Housing Median Age</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% medianData.rows.forEach(function(data) { %>
+                <tr>
+                  <td><%= data.ocean_proximity %></td>
+                  <td>$<%= data.median_house_price %></td>
+                  <td><%= data.median_income %></td>
+                  <td><%= data.housing_median_age %></td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-2"></div>
+      </div>
+    </div>
+  </main>
+
+  <br><br><br><br><br><br><br>
+
+  <footer class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-text text-center mx-auto" style="float:inherit">
+        <p style="text-align: center; color:#ffffff;">Made with ❤️ by Chaitanya Sharma</p>
+        <p style="color:#ffffff"> Quira Quest + Mindsdb</p>
+      </div>
+    </div>
+  </footer>
+  </footer>
+</body>
+
+</html>

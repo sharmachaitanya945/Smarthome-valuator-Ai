@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SmartHome Valuator: AI-Powered Price Predictions🏡🤖</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <script>
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e1e2f, #1a1a2e);
+            color: #ffffff;
+        }
+
+        .navbar-inverse {
+            background: linear-gradient(135deg, #33334d, #1a1a2e);
+            border-color: #1a1a2e;
+        }
+
+        .navbar-inverse .navbar-brand,
+        .navbar-inverse .navbar-nav>li>a {
+            color: #ffffff;
+        }
+
+        .navbar-header img.logo {
+            max-height: 50px;
+            max-width: 50px;
+            margin-right: 10px;
+        }
+
+        .btn-default {
+            background: linear-gradient(135deg, #33334d, #1a1a2e);
+            color: #ffffff;
+            border: none;
+        }
+
+      
+
+        h2, h3, ul li, .form-group label, h4 {
+            color: #ffffff;
+        }
+
+        h2 {
+            text-transform: uppercase;
+        }
+
+        ul li {
+            font-style: italic;
+            font-size: medium;
+        }
+
+        .form-control {
+            background-color: #2a2a3e;
+            color: #ffffff;
+            border: 1px solid #33334d;
+        }
+        footer.navbar-default {
+            background: linear-gradient(135deg, #33334d, #1a1a2e);
+            color: #ffffff;
+            text-align: center;
+            margin-top: auto;}
+
+        .form-control:focus {
+            background-color: #2a2a3e;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                
+                <a class="navbar-brand" href="#">HomeScopeCA </a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">🏠 Home</a></li>
+                <li class="active"><a href="http://localhost:3000/dashboard">📊 Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <br>
+
+    <h1 style="text-align: center;">Dashboard 📊</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Average No of Rooms in California per Household for each Ocean Proximity 🛏️</h4>
+                <canvas id="chart1"></canvas>
+            </div>
+            <div class="col-md-6">
+                <h4>Median House Prices in California over Time by Ocean Proximity 📈</h4>
+                <canvas id="chart2"></canvas>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+    <br><br><br>
+    <br><br><br>
+    <footer class="navbar navbar-default">
+        <div class="container footer-container">
+        <p>Quira Quest + Mindsdb</p>
+        <p>Made with ❤️ by Chaitanya Sharma</p>
+        </div>
+    </footer>
+
+    <script>
+        fetch('http://localhost:3000/chart1')
+            .then(response => response.json())
+            .then(data => {
+                // Extract data for chart
+                const labels = data.map(row => row.ocean_proximity);
+                const values = data.map(row => row.avg_rooms_per_household);
+
+                // Create chart
+                const chartEl = document.getElementById('chart1');
+                const chart = new Chart(chartEl, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Avg Rooms per Household',
+                            data: values,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error(error));
+
+
+        // Retrieve JSON data from server for chart 2
+        fetch('http://localhost:3000/chart2')
+            .then(response => response.json())
+            .then(data => {
+                // Extract data for chart
+                const datasets = Array.from(new Set(data.map(row => row.ocean_proximity)))
+                    .map(op => {
+                        return {
+                            label: op,
+                            backgroundColor: getRandomColor(),
+                            borderColor: 'white',
+                            borderWidth: 1,
+                            data: data.filter(row => row.ocean_proximity === op)
+                                .map(row => {
+                                    return {
+                                        x: row.median_income,
+                                        y: row.median_house_price,
+                                    };
+                                }),
+                        };
+                    });
+
+                // Display chart
+                const ctx = document.getElementById('chart2').getContext('2d');
+                new Chart(ctx, {
+                    type: 'scatter',
+                    data: {
+                        datasets: datasets,
+                    },
+                    options: {
+                        scales: {
+                            xAxes: [
+                                {
+                                    stacked: true,
+                                },
+                            ],
+                            yAxes: [
+                                {
+                                    stacked: true,
+                                    ticks: {
+                                        beginAtZero: true,
+                                    },
+                                },
+                            ],
+                        },
+                    },
+                });
+            });
+    </script>
+</body>
+
+</html>
